@@ -1,7 +1,7 @@
 package com.sec.auth;
 
-import com.sec.auth.entities.Role;
-import com.sec.auth.entities.User;
+import com.sec.auth.entities.AppRole;
+import com.sec.auth.entities.AppUser;
 import com.sec.auth.services.AuthService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -21,32 +21,32 @@ public class AuthWithJwtApplication {
 	CommandLineRunner start(AuthService authService) {
 		return args -> {
 			System.out.println("-----------------");
-			authService.addRole(new Role(null, "USER"));
-			authService.addRole(new Role(null, "ADMIN"));
-			authService.addRole(new Role(null, "MANAGER"));
-			authService.addRole(new Role(null, "SUPERVISOR"));
-			authService.addRole(new Role(null, "OPERATOR"));
+			authService.addAppRole(new AppRole(null, "USER"));
+			authService.addAppRole(new AppRole(null, "ADMIN"));
+			authService.addAppRole(new AppRole(null, "MANAGER"));
+			authService.addAppRole(new AppRole(null, "SUPERVISOR"));
+			authService.addAppRole(new AppRole(null, "OPERATOR"));
 
 
-			authService.addUser(new User(null, "user", "1234", new ArrayList<>()));
-			authService.addUser(new User(null, "admin", "1234", new ArrayList<>()));
-			authService.addUser(new User(null, "manager", "1234", new ArrayList<>()));
-			authService.addUser(new User(null, "supervisor", "1234", new ArrayList<>()));
-			authService.addUser(new User(null, "operator", "1234", new ArrayList<>()));
+			authService.addAppUser(new AppUser(null, "user", "1234", new ArrayList<>()));
+			authService.addAppUser(new AppUser(null, "admin", "1234", new ArrayList<>()));
+			authService.addAppUser(new AppUser(null, "manager", "1234", new ArrayList<>()));
+			authService.addAppUser(new AppUser(null, "supervisor", "1234", new ArrayList<>()));
+			authService.addAppUser(new AppUser(null, "operator", "1234", new ArrayList<>()));
 
-			authService.addRoleToUser("user", "USER");
+			authService.addAppRoleToAppUser("user", "USER");
 
-			authService.addRoleToUser("admin", "USER");
-			authService.addRoleToUser("admin", "ADMIN");
+			authService.addAppRoleToAppUser("admin", "USER");
+			authService.addAppRoleToAppUser("admin", "ADMIN");
 
-			authService.addRoleToUser("manager", "MANAGER");
-			authService.addRoleToUser("manager", "USER");
+			authService.addAppRoleToAppUser("manager", "MANAGER");
+			authService.addAppRoleToAppUser("manager", "USER");
 
-			authService.addRoleToUser("supervisor", "SUPERVISOR");
-			authService.addRoleToUser("supervisor", "USER");
+			authService.addAppRoleToAppUser("supervisor", "SUPERVISOR");
+			authService.addAppRoleToAppUser("supervisor", "USER");
 
-			authService.addRoleToUser("operator", "OPERATOR");
-			authService.addRoleToUser("operator", "USER");
+			authService.addAppRoleToAppUser("operator", "OPERATOR");
+			authService.addAppRoleToAppUser("operator", "USER");
 
 		};
 	}

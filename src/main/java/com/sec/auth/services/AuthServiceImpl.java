@@ -1,9 +1,9 @@
 package com.sec.auth.services;
 
-import com.sec.auth.entities.Role;
-import com.sec.auth.entities.User;
-import com.sec.auth.repositories.RoleRepository;
-import com.sec.auth.repositories.UserRepository;
+import com.sec.auth.entities.AppRole;
+import com.sec.auth.entities.AppUser;
+import com.sec.auth.repositories.AppRoleRepository;
+import com.sec.auth.repositories.AppUserRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -14,33 +14,33 @@ import java.util.List;
 @Transactional
 @AllArgsConstructor
 public class AuthServiceImpl implements AuthService {
-    private final UserRepository userRepository;
-    private final RoleRepository roleRepository;
+    private final AppUserRepository appUserRepository;
+    private final AppRoleRepository appRoleRepository;
 
     @Override
-    public User addUser(User user) {
-        return userRepository.save(user);
+    public AppUser addAppUser(AppUser appUser) {
+        return appUserRepository.save(appUser);
     }
 
     @Override
-    public Role addRole(Role role) {
-        return roleRepository.save(role);
+    public AppRole addAppRole(AppRole AppRole) {
+        return appRoleRepository.save(AppRole);
     }
 
     @Override
-    public void addRoleToUser(String username, String roleName) {
-        User user = userRepository.findByUsername(username);
-        Role role = roleRepository.findByRoleName(roleName);
-        user.getRoles().add(role);
+    public void addAppRoleToAppUser(String Username, String RoleName) {
+        AppUser appUser = appUserRepository.findByUsername(Username);
+        AppRole appRole = appRoleRepository.findByRoleName(RoleName);
+        appUser.getRoles().add(appRole);
     }
 
     @Override
-    public User getUserByUsername(String username) {
-        return userRepository.findByUsername(username);
+    public AppUser getAppUserByUsername(String username) {
+        return appUserRepository.findByUsername(username);
     }
 
     @Override
-    public List<User> getUsers() {
-        return userRepository.findAll();
+    public List<AppUser> getAppUsers() {
+        return appUserRepository.findAll();
     }
 }
