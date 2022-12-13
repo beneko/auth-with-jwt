@@ -5,6 +5,7 @@ import com.sec.auth.entities.AppUser;
 import com.sec.auth.repositories.AppRoleRepository;
 import com.sec.auth.repositories.AppUserRepository;
 import lombok.AllArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -17,8 +18,12 @@ public class AuthServiceImpl implements AuthService {
     private final AppUserRepository appUserRepository;
     private final AppRoleRepository appRoleRepository;
 
+    private final PasswordEncoder passwordEncoder;
+
     @Override
     public AppUser addAppUser(AppUser appUser) {
+        String pwd = appUser.getPassword();
+        appUser.setPassword(passwordEncoder.encode(pwd));
         return appUserRepository.save(appUser);
     }
 
